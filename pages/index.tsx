@@ -43,8 +43,14 @@ const ComingSoon = () => {
   return (
     <div style={styles.container}>
       <h1 style={styles.title}>Coming Soon!</h1>
-      <p style={styles.subtitle}>We are launching on October 6, 2024, at 05:30 AM.</p>
-      {timerComponents.length ? <div style={styles.timer}>{timerComponents}</div> : <span>Time's up!</span>}
+      <p style={styles.subtitle}>
+        We are launching on October 6, 2024, at 05:30 AM.
+      </p>
+      {timerComponents.length ? (
+        <div style={styles.timer}>{timerComponents}</div>
+      ) : (
+        <span>Time&apos;s up!</span>
+      )}
     </div>
   );
 };
