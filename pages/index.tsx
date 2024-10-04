@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 
-const Home = () => {
+const ComingSoon = () => {
   const calculateTimeLeft = () => {
-    const difference = +new Date('2024-10-06T05:30:00+05:30') - +new Date();
-    let timeLeft: { [key: string]: number } = {};
+    const difference = +new Date('2024-10-06T05:30:00') - +new Date();
+    let timeLeft = {};
 
     if (difference > 0) {
       timeLeft = {
@@ -18,6 +18,7 @@ const Home = () => {
   };
 
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
+  const [year] = useState(new Date().getFullYear());
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -30,26 +31,20 @@ const Home = () => {
   const timerComponents: JSX.Element[] = [];
 
   Object.keys(timeLeft).forEach((interval) => {
-    if (!timeLeft[interval]) return;
-
-    timerComponents.push(
-      <span key={interval}>
-        {timeLeft[interval]} {interval}{' '}
-      </span>
-    );
+    if (timeLeft[interval as keyof typeof timeLeft]) {
+      timerComponents.push(
+        <span key={interval}>
+          {timeLeft[interval as keyof typeof timeLeft]} {interval}{' '}
+        </span>
+      );
+    }
   });
 
   return (
     <div style={styles.container}>
-      <h1 style={styles.title}>Coming Soon</h1>
-      <p style={styles.subtitle}>Our website is under construction. Stay tuned!</p>
-      {timerComponents.length ? (
-        <div style={styles.timer}>
-          {timerComponents}
-        </div>
-      ) : (
-        <span>It&#39;s coming soon!</span>
-      )}
+      <h1 style={styles.title}>Coming Soon!</h1>
+      <p style={styles.subtitle}>We are launching on October 6, 2024, at 05:30 AM.</p>
+      {timerComponents.length ? <div style={styles.timer}>{timerComponents}</div> : <span>Time's up!</span>}
     </div>
   );
 };
@@ -57,16 +52,16 @@ const Home = () => {
 const styles = {
   container: {
     display: 'flex',
-    flexDirection: 'column' as 'column',
+    flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
     height: '100vh',
-    backgroundColor: '#f5f5f5',
-    textAlign: 'center' as 'center',
+    backgroundColor: '#282c34',
+    color: 'white',
+    fontFamily: 'Arial, sans-serif',
   },
   title: {
     fontSize: '48px',
-    fontWeight: 'bold' as 'bold',
     marginBottom: '20px',
   },
   subtitle: {
@@ -75,8 +70,7 @@ const styles = {
   },
   timer: {
     fontSize: '32px',
-    fontWeight: 'bold' as 'bold',
   },
 };
 
-export default Home;
+export default ComingSoon;
