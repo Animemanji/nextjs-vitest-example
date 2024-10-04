@@ -48,7 +48,7 @@ const Home = () => {
           {timerComponents}
         </div>
       ) : (
-        <span>Time's up!</span>
+        <span>It&#39;s coming soon!</span>
       )}
     </div>
   );
